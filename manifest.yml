@@ -1,11 +1,11 @@
 ---
-name: MATLAB http
+name: MATLAB Server
 category: Interactive Apps
 subcategory: Servers
 role: batch_connect
 description: |
-  This app will launch a [MATLAB] GUI on the [Owens cluster]. You will be able
-  to interact with the MATLAB GUI through a VNC session.
+  This app will launch a [MATLAB] GUI on the [Cardinal cluster]. You will be able
+  to interact with the MATLAB over http.
 
   [MATLAB]: https://www.mathworks.com/products/matlab.html
-  [Owens cluster]: https://www.osc.edu/resources/technical_support/supercomputers/owens
+  [Cardinal cluster]: https://www.osc.edu/resources/technical_support/supercomputers/cardinal
