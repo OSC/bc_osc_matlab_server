@@ -1,0 +1,11 @@
+
+module purge
+module restore
+
+module load xalt/latest <%= context.auto_modules_matlab %>
+module load project/ondemand
+module load app_jupyter_matlab_proxy/4.1.5
+
+cd $HOME
+
+matlab-proxy-app
