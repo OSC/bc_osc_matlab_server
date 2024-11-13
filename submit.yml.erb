@@ -3,16 +3,15 @@
   err_msg = "You are not a member of the matlab group. Please email oschelp@osc.edu to request access to MATLAB."
   raise(StandardError, err_msg) unless CurrentUser.group_names.include?('matlab')
 
-  nodes = 1
   ppn = num_cores.blank? ? 96 : num_cores.to_i
 
   case node_type
   when "largemem"
-    slurm_args = [ "--nodes", "#{nodes}", "--ntasks-per-node", "#{ppn}", "--partition", "hugemem" ]
+    slurm_args = [ "--ntasks-per-node", "#{ppn}", "--partition", "hugemem" ]
   when "gpu"
-    slurm_args = [ "--nodes", "#{nodes}", "--ntasks-per-node", "#{ppn}", "--gpus-per-node", "1" ]
+    slurm_args = [ "--ntasks-per-node", "#{ppn}", "--gpus-per-node", "1" ]
   else
-    slurm_args = [ "--nodes", "#{nodes}", "--ntasks-per-node", "#{ppn}" ]
+    slurm_args = [ "--ntasks-per-node", "#{ppn}" ]
   end
 %>
 ---

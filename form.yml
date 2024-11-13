@@ -5,7 +5,6 @@ form:
   - version
   - auto_accounts
   - bc_num_hours
-  - bc_num_slots
   - num_cores
   - node_type
   - bc_email_on_started
