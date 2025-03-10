@@ -9,7 +9,12 @@ form:
   - node_type
   - bc_email_on_started
 attributes:
-  version: 'matlab/r2024a'
+  version: 
+    widget: select
+    label: "MATLAB version"
+    options:
+      - ["2024a", "matlab/r2024a"]
+      - ["2024b", "matlab/r2024b"]
   num_cores:
     widget: "number_field"
     label: "Number of cores"
