@@ -1,24 +1,33 @@
 <%-
-
   err_msg = "You are not a member of the matlab group. Please email oschelp@osc.edu to request access to MATLAB."
   raise(StandardError, err_msg) unless CurrentUser.group_names.include?('matlab')
-
-  ppn = num_cores.blank? ? 96 : num_cores.to_i
-
-  case node_type
-  when "largemem"
-    slurm_args = [ "--ntasks-per-node", "#{ppn}", "--partition", "hugemem" ]
-  when "gpu"
-    slurm_args = [ "--ntasks-per-node", "#{ppn}", "--gpus-per-node", "1" ]
-  else
-    slurm_args = [ "--ntasks-per-node", "#{ppn}" ]
-  end
 %>
 ---
 batch_connect:
   template: basic
 script:
+  # set GPUs
+  <%- if global_gpus.to_i > 0 -%>
+  gpus_per_node: <%= global_gpus %>
+  <%- end %>
   native:
-  <%- slurm_args.each do |arg| %>
-    - "<%= arg %>"
+  # set nodes
+  - "--nodes"
+  - "<%= bc_num_nodes.to_i %>"
+  # set CPUs
+  - "--ntasks-per-node"
+  - "<%= global_num_cores.to_i %>"
+  # set partition
+  - "--partition"
+  <%- if global_enable_debug.to_i == 1 -%>
+  - "debug"
+  <%- elsif global_gpus.to_i > 0 -%>
+  - "<%= global_gpu_type.split('-').drop(1).join('-') %>"
+  <%- else %>
+  - "batch"
+  <%- end %>
+  # set memory
+  <%- if global_enable_mem.to_i == 1  -%>
+  - "--mem"
+  - "<%= global_mem.to_i%>G"
   <%- end %>
