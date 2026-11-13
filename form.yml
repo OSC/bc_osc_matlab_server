@@ -19,6 +19,7 @@ form:
 attributes:
   auto_modules_ollama:
     default: false
+    filter: "0.1\d.|0.40.6|0.5.13"
     help: "This defines the version of Ollama you want to load."
     label: "Ollama version"
   ollama_models:
